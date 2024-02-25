@@ -1,0 +1,14 @@
+version: "3" #badelha b version fl cammande hedhy : docker-compose --version
+services:
+ 
+  frontend:
+    image: node:20 #version node li 3andk
+    container_name: frontend
+    working_dir: /app
+    command: npm start
+    ports:
+      - "3000:3000" # mapper le port 3000 du conteneur Docker sur le port 3000 de l'hôte local.
+    volumes:
+      - "./:/app" # ./frontend badelha Path relatif l fih code source # commande :  docker-compose up  w tasti 
+  
+
