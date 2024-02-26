@@ -9,6 +9,7 @@ services:
     ports:
       - "3000:3000" # mapper le port 3000 du conteneur Docker sur le port 3000 de l'hôte local.
     volumes:
-      - "./:/app" # ./frontend badelha Path relatif l fih code source # commande :  docker-compose up  w tasti 
-  
+      - "./:/app"
+      - "./package.json:/app/package.json" # ./frontend badelha Path relatif l fih code source # commande :  docker-compose up  w tasti
+      - "./package-lock.json:/app/package-lock.json"  
 
