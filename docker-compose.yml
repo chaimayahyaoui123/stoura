@@ -1,3 +1,4 @@
+
 version: "3"
 
 services:
@@ -6,8 +7,14 @@ services:
     image: app-dev-i
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.yml
     volumes:
       - ./src:/app/src
     ports:
       - "3000:3000"
+
+
+
+
+
+
