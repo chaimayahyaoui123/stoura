@@ -12,7 +12,7 @@ services:
     env_file: 
       - ".env"
     volumes: 
-      - "./app/src:/workspace/src"
+      - "./src:/workspace/src"
 
 
 
