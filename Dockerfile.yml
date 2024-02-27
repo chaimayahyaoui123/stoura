@@ -1,33 +1,11 @@
 FROM node:20-alpine
-
-# Add a work directory
-WORKDIR /app
-
-
-# Cache and Install dependencies
-COPY package.json .
-COPY package-lock.json .
-# Set the Yarn cache folder
-ENV YARN_CACHE_FOLDER=/root/.yarn
-
-# Configure Yarn to use the specified cache folder
-RUN yarn config set cache-folder $YARN_CACHE_FOLDER
-
-# Display yarn cache list (optional)
-RUN yarn cache list
-
-# Install dependencies
-RUN YARN_CACHE_FOLDER=$YARN_CACHE_FOLDER yarn install --network-timeout=600000 --frozen-lockfile
-
-# Copy app files
+RUN apk update && apk add --no-cache --virtual \
+    .build-deps \
+    udev \
+    ttf-opensans \
+    chromium \
+    ca-certificates
+WORKDIR /workspace
+COPY ./package.json .
+RUN --mount=type=cache,target=/root/.yarn YARN_CACHE_FOLDER=/root/.yarn yarn install
 COPY . .
-RUN chown -R node:node /app/src
-RUN chmod -R 777  /app/src
-
-
-# Expose port
-EXPOSE 3000
-USER node
-
-# Start the app
-CMD [ "npm", "start" ]
